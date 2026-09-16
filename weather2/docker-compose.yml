@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  # --------------------------------------------------------------------------
+  # 1. Primary Datastore: PostgreSQL + PostGIS Extension
+  # --------------------------------------------------------------------------
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: imd_postgis
+    environment:
+      POSTGRES_USER: imd_admin
+      POSTGRES_PASSWORD: imd_secure_pass_2026
+      POSTGRES_DB: weather_analytics
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U imd_admin -d weather_analytics"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - weather_net
+
+  # --------------------------------------------------------------------------
+  # 2. Streaming Bus: Redpanda (Kafka-compatible, ultra-low resource footprint)
+  # --------------------------------------------------------------------------
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v23.3.11
+    container_name: imd_streaming_bus
+    command:
+      - redpanda start
+      - --smp 1
+      - --memory 512M
+      - --overprovisioned
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+    ports:
+      - "19092:19092"
+      - "9644:9644"
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+    networks:
+      - weather_net
+
+  # --------------------------------------------------------------------------
+  # 3. Backend REST & WebSocket Engine: FastAPI
+  # --------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.backend
+    container_name: imd_fastapi_backend
+    environment:
+      - ENV=production
+      - API_PORT=8000
+      - DATABASE_URL=postgresql+psycopg2://imd_admin:imd_secure_pass_2026@postgres:5432/weather_analytics
+      - KAFKA_BROKER=redpanda:9092
+      - KAFKA_TOPIC=raw-weather-events
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./media:/app/media
+    networks:
+      - weather_net
+
+  # --------------------------------------------------------------------------
+  # 4. Stream Processing & ML AI Worker
+  # --------------------------------------------------------------------------
+  ml-worker:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.worker
+    container_name: imd_ml_worker
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://imd_admin:imd_secure_pass_2026@postgres:5432/weather_analytics
+      - KAFKA_BROKER=redpanda:9092
+      - KAFKA_TOPIC=raw-weather-events
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - weather_net
+
+  # --------------------------------------------------------------------------
+  # 5. Frontend: React Tactical Command Dashboard
+  # --------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../infra/Dockerfile.frontend
+    container_name: imd_tactical_dashboard
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - weather_net
+
+volumes:
+  postgres_data:
+  redpanda_data:
+
+networks:
+  weather_net:
+    driver: bridge

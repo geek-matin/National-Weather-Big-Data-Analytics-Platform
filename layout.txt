@@ -1,0 +1,75 @@
+┌─────────────────────────────────────────────────────────────┐
+│  🌧️ FLOODING                                               │
+│  Mumbai                                    ● MONITORING      │
+│                                                             │
+│  [ 📍 OPEN IN MAP ]                         Updated 2 min ago│
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  CURRENT RISK                                               │
+│                                                             │
+│        HIGH                                                 │
+│        Flood Risk Score: 78 / 100                           │
+│                                                             │
+│        ████████████████░░░░                                 │
+│                                                             │
+│  ⚠ Significant flooding potential detected                 │
+│                                                             │
+│  System Confidence: HIGH                                    │
+│  4 of 5 sources indicate elevated flood risk               │
+│                                                             │
+├─────────────────────────────────────────────────────────────┤
+│  KEY INDICATORS                                             │
+│                                                             │
+│  🌧️ Rainfall          86 mm / 6h                           │
+│  💧 Soil Saturation    91%                                  │
+│  🌊 Water Level        4.2 m                                │
+│  🌧️ Rain Probability  82%                                  │
+│  💨 Wind               18 km/h                              │
+│                                                             │
+├─────────────────────────────────────────────────────────────┤
+│  SOURCE COMPARISON                                          │
+│                                                             │
+│  Indicator       Source A   Source B   Source C   SYSTEM   │
+│  Rainfall          82 mm      89 mm      86 mm      86 mm  │
+│  Water Level        4.1 m      4.3 m      4.2 m       4.2m  │
+│  Rain Chance         78%        85%        82%        82%  │
+│  Risk Level          HIGH       HIGH       HIGH       HIGH  │
+│                                                             │
+├─────────────────────────────────────────────────────────────┤
+│  ⚠ SOURCE CONSENSUS                                        │
+│                                                             │
+│  4 / 5 sources → HIGH RISK                                 │
+│  1 / 5 sources → MODERATE                                  │
+│                                                             │
+│  Agreement: 87%                                             │
+│                                                             │
+├─────────────────────────────────────────────────────────────┤
+│  RISK TIMELINE                                              │
+│                                                             │
+│  NOW       +3h       +6h       +12h       +24h              │
+│   🟠        🔴         🔴         🟠         🟡              │
+│  HIGH      SEVERE     SEVERE      HIGH    MODERATE          │
+│                                                             │
+├─────────────────────────────────────────────────────────────┤
+│  DATA SOURCES                                               │
+│                                                             │
+│  SOURCE A                              Updated 2 min ago     │
+│  ● Verified source                                          │
+│  Authenticity  ███████████████████░  95%                    │
+│                                                             │
+│  SOURCE B                              Updated 3 min ago     │
+│  ● Verified source                                          │
+│  Authenticity  ██████████████████░░  90%                    │
+│                                                             │
+│  SOURCE C                              Updated 4 min ago     │
+│  ● Verified source                                          │
+│  Authenticity  ████████████████████  98%                    │
+│                                                             │
+│  SOURCE D                              Updated 5 min ago     │
+│  ● Verified source                                          │
+│  Authenticity  ████████████████░░░░  82%                    │
+│                                                             │
+│  ⚠ SOURCE E                              Delayed             │
+│  Authenticity  ████████████░░░░░░░░  61%                    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘

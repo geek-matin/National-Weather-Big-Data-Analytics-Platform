@@ -1,0 +1,12 @@
+{
+  "name": "national-weather-platform-root",
+  "version": "2.2.0",
+  "private": true,
+  "description": "National Weather Big Data Analytics Platform - MoES / IMD",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "start": "powershell -ExecutionPolicy Bypass -File ./run_local.ps1"
+  }
+}

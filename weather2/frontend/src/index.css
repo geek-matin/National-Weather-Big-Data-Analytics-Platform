@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background-color: #07080c;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', monospace;
+  background-image: radial-gradient(rgba(28, 37, 56, 0.4) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Tactical Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #07080c;
+  border-left: 1px solid #1c2538;
+}
+::-webkit-scrollbar-thumb {
+  background: #27354d;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+/* Tactical Corner Accent Brackets */
+.tactical-box {
+  position: relative;
+  background: #0d111a;
+  border: 1px solid #1c2538;
+}
+.tactical-box::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #06b6d4;
+  border-left: 2px solid #06b6d4;
+  pointer-events: none;
+}
+.tactical-box::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 2px solid #06b6d4;
+  border-right: 2px solid #06b6d4;
+  pointer-events: none;
+}
+
+.tactical-box-alert {
+  position: relative;
+  background: #130a0d;
+  border: 1px solid #ef4444;
+}
+.tactical-box-alert::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #ef4444;
+  border-left: 2px solid #ef4444;
+  pointer-events: none;
+}
+
+/* Custom Radar Blip Animation for Leaflet */
+.radar-blip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.radar-blip-core {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.radar-blip-pulse {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  animation: radarPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes radarPulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Tactical Leaflet Map Overrides */
+.leaflet-container {
+  background-color: #07080c !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #0d111a !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #27354d !important;
+  border-radius: 0px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8) !important;
+}
+
+.leaflet-popup-tip {
+  background: #0d111a !important;
+  border: 1px solid #27354d !important;
+}
